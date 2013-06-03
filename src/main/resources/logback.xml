@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d %-5p: [%c] %m%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!--appender name="rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Append>true</Append>
+		<File>D:/Project/CMS/P001_CMS_Core_Server/logs/cms.log</File>
+		<encoder>
+			<pattern>%d %-5p: [%c] %m%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>D:/Project/CMS/P001_CMS_Core_Server/logs/cms.%d{yyyyMMdd}.log</fileNamePattern>
+		</rollingPolicy>
+	</appender-->
+	
+	<root level="info">
+		<appender-ref ref="console" />
+		<!--appender-ref ref="rolling" /-->
+	</root>
+	
+	<logger name="com.nnggstory.rss" additivity="false" level="debug">
+		<appender-ref ref="console" />
+		<!--appender-ref ref="rolling" /-->
+	</logger>
+	
+	<logger name="org.springframework.web" additivity="false" level="debug">
+		<appender-ref ref="console" />
+		<!--appender-ref ref="rolling" /-->
+	</logger>
+	
+	<logger name="org.springframework.data" additivity="false" level="debug">
+		<appender-ref ref="console" />
+		<!--appender-ref ref="rolling" /-->
+	</logger>
+	
+</configuration>

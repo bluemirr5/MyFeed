@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/data/mongo
+		http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+		http://www.springframework.org/schema/data/jpa
+		http://www.springframework.org/schema/data/jpa/spring-jpa-1.1.xsd
+		http://www.springframework.org/schema/jdbc
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/cache
+		http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
+	
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.nnggstory.rss" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+<!-- 		<context:include-filter type="annotation" expression="com.prompt.cms.core.persistence.annotation.QueryMaker" /> -->
+	</context:component-scan>
+	
+	<mongo:db-factory
+		id="mongoDbFactory"
+		host="${rss.mongodb.config.host}"
+		port="${rss.mongodb.config.port}"
+		dbname="${rss.mongodb.config.dbname}"
+		username="${rss.mongodb.config.username}"
+	/>
+<!-- 		password="${rss.mongodb.config.password}" -->
+	
+	<bean id="mongoTypeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<constructor-arg name="typeKey"><null/></constructor-arg>
+	</bean>
+	
+	<bean id="mongoMappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+	
+	<bean id="mongoConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		<constructor-arg name="mappingContext" ref="mongoMappingContext" />
+		<property name="typeMapper" ref="mongoTypeMapper" />
+	</bean>
+	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		<constructor-arg name="mongoConverter" ref="mongoConverter" />
+	</bean>
+	
+	<bean id="concurrentMapCacheManager" class="org.springframework.cache.concurrent.ConcurrentMapCacheManager" />
+	
+	<cache:annotation-driven cache-manager="concurrentMapCacheManager" />
+	
+	<!-- @Repository가 정의되어 있는 빈에 대해서 DAO관련 익셉션을 DataAccessException 으로 변환해준다. -->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
+</beans>
