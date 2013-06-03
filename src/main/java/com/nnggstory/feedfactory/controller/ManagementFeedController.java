@@ -1,5 +1,8 @@
 package com.nnggstory.feedfactory.controller;
 
-public class ManagementFeedController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class ManagementFeedController {
+  
 }
