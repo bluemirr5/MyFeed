@@ -35,7 +35,7 @@
 <!-- 	<mvc:resources mapping="/contents_file/**" location="file:${cms.local.contents.path}/" /> -->
 <!-- 	<mvc:resources mapping="/contents_temp_file/**" location="file:${cms.local.contents.temp.path}/" /> -->
 	
-	<context:component-scan base-package="com.nnggstory.rss" use-default-filters="false">
+	<context:component-scan base-package="com.nnggstory" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	

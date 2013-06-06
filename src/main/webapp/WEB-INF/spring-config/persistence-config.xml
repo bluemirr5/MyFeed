@@ -29,17 +29,16 @@
 	
 	<context:annotation-config />
 	
-	<context:component-scan base-package="com.nnggstory.rss" use-default-filters="false">
+	<context:component-scan base-package="com.nnggstory" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
-<!-- 		<context:include-filter type="annotation" expression="com.prompt.cms.core.persistence.annotation.QueryMaker" /> -->
 	</context:component-scan>
 	
 	<mongo:db-factory
 		id="mongoDbFactory"
-		host="${rss.mongodb.config.host}"
-		port="${rss.mongodb.config.port}"
-		dbname="${rss.mongodb.config.dbname}"
-		username="${rss.mongodb.config.username}"
+		host="${feedfactory.mongodb.config.host}"
+		port="${feedfactory.mongodb.config.port}"
+		dbname="${feedfactory.mongodb.config.dbname}"
+		username="${feedfactory.mongodb.config.username}"
 	/>
 <!-- 		password="${rss.mongodb.config.password}" -->
 	

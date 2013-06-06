@@ -1,11 +1,19 @@
-package com.nnggstory.rss.model;
+package com.nnggstory.feedfactory.model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-import org.springframework.data.annotation.Id;
-
+/**
+ * 실제 하나의 feed를 담기 위한 모델 클래스.
+ * 
+ * @author bluemirr5
+ *
+ */
 public class ArticleModel {
-	@Id
 	private String link = null;
 	private String host = null;
 	private String title = null;
@@ -13,6 +21,7 @@ public class ArticleModel {
 	private String text = null;
 	private String pubDate = null;
 	private List<String> categorys = null;
+	private long pubDateToLong = 0;
 	
 	public String getLink() {
 		return link;
@@ -47,7 +56,10 @@ public class ArticleModel {
 	public String getPubDate() {
 		return pubDate;
 	}
-	public void setPubDate(String pubDate) {
+	public void setPubDate(String pubDate) throws ParseException {
+		DateFormat dateFormatterRssPubDate = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+		Date pubDateForLong = dateFormatterRssPubDate.parse(pubDate);
+		this.pubDateToLong = pubDateForLong.getTime();
 		this.pubDate = pubDate;
 	}
 	public List<String> getCategorys() {
@@ -55,5 +67,11 @@ public class ArticleModel {
 	}
 	public void setCategorys(List<String> categorys) {
 		this.categorys = categorys;
+	}
+	public long getPubDateToLong() {
+		return pubDateToLong;
+	}
+	public void setPubDateToLong(long pubDateToLong) {
+		this.pubDateToLong = pubDateToLong;
 	}
 }

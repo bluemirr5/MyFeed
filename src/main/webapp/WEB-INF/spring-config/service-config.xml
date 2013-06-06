@@ -19,7 +19,7 @@
 	
 	<context:annotation-config />
 	
-	<context:component-scan base-package="com.nnggstory.rss" use-default-filters="false">
+	<context:component-scan base-package="com.nnggstory" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
 	</context:component-scan>

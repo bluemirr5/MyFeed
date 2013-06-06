@@ -1,7 +1,8 @@
-package com.nnggstory.rss.service.actionobj;
+package com.nnggstory.feedfactory.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.nnggstory.rss.model.ArticleModel;
+import com.nnggstory.feedfactory.model.ArticleModel;
+
 
 public class RssArticleParser extends DefaultHandler {
 	private StringBuilder stringBuilder = null;
@@ -63,7 +65,11 @@ public class RssArticleParser extends DefaultHandler {
         	curArticle.setLink(stringBuilder.toString().trim());
 		}
         else if (qName.equalsIgnoreCase("pubDate") && itemFieldFlag) {
-        	curArticle.setPubDate(stringBuilder.toString().trim());
+        	try {
+				curArticle.setPubDate(stringBuilder.toString().trim());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
         } else if(qName.equalsIgnoreCase("category") && itemFieldFlag) {
         	curArticle.getCategorys().add(stringBuilder.toString().trim());
         }
