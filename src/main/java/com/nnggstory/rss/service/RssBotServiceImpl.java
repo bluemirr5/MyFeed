@@ -19,13 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nnggstory.feedfactory.service.RssRequestManager;
 import com.nnggstory.rss.dao.RssDao;
 import com.nnggstory.rss.model.ArticleModel;
 import com.nnggstory.rss.model.HostModel;
 import com.nnggstory.rss.service.actionobj.HTMLCleaner;
 import com.nnggstory.rss.service.actionobj.RssArticleParser;
 import com.nnggstory.rss.service.actionobj.RssHostParser;
-import com.nnggstory.rss.service.actionobj.RssRequestManager;
 
 @Service
 public class RssBotServiceImpl implements RssBotService {

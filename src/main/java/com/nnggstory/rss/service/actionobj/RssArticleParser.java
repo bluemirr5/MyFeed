@@ -64,7 +64,8 @@ public class RssArticleParser extends DefaultHandler {
 		}
         else if (qName.equalsIgnoreCase("pubDate") && itemFieldFlag) {
         	curArticle.setPubDate(stringBuilder.toString().trim());
-        } else if(qName.equalsIgnoreCase("category") && itemFieldFlag) {
+        }
+        else if(qName.equalsIgnoreCase("category") && itemFieldFlag) {
         	curArticle.getCategorys().add(stringBuilder.toString().trim());
         }
 		if (qName.equalsIgnoreCase("item")) {

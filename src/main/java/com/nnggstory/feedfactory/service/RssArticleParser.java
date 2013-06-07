@@ -2,7 +2,6 @@ package com.nnggstory.feedfactory.service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.nnggstory.feedfactory.model.ArticleModel;
-
 
 public class RssArticleParser extends DefaultHandler {
 	private StringBuilder stringBuilder = null;
@@ -54,25 +52,39 @@ public class RssArticleParser extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		super.endElement(uri, localName, qName);
+		String curElementValue = stringBuilder.toString().trim();
 		
 		if (qName.equalsIgnoreCase("title") && itemFieldFlag) {
-			curArticle.setTitle(stringBuilder.toString().trim());
+			curArticle.setTitle(curElementValue);
         }
         else if (qName.equalsIgnoreCase("description") && itemFieldFlag) {
-        	curArticle.setDescription(stringBuilder.toString().trim());
+        	curArticle.setDescription(curElementValue);
         }
         else if (qName.equalsIgnoreCase("link") && itemFieldFlag) {
-        	curArticle.setLink(stringBuilder.toString().trim());
+        	curArticle.setLink(curElementValue);
 		}
         else if (qName.equalsIgnoreCase("pubDate") && itemFieldFlag) {
-        	try {
-				curArticle.setPubDate(stringBuilder.toString().trim());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-        } else if(qName.equalsIgnoreCase("category") && itemFieldFlag) {
-        	curArticle.getCategorys().add(stringBuilder.toString().trim());
+			curArticle.setPubDate(curElementValue);
+        } 
+        else if(qName.equalsIgnoreCase("category") && itemFieldFlag) {
+        	curArticle.getCategorys().add(curElementValue);
         }
+        else if(qName.equalsIgnoreCase("author") && itemFieldFlag) {
+        	curArticle.setAuthor(curElementValue);
+        }
+        else if(qName.equalsIgnoreCase("comments") && itemFieldFlag) {
+        	curArticle.setComments(curElementValue);
+        }
+        else if(qName.equalsIgnoreCase("enclosure") && itemFieldFlag) {
+        	curArticle.setEnclosure(curElementValue);
+        }
+        else if(qName.equalsIgnoreCase("guid") && itemFieldFlag) {
+        	curArticle.setGuid(curElementValue);
+        }
+        else if(qName.equalsIgnoreCase("source") && itemFieldFlag) {
+        	curArticle.setSource(curElementValue);
+        }
+		
 		if (qName.equalsIgnoreCase("item")) {
 			itemFieldFlag = false;
 			articleList.add(curArticle);
@@ -85,10 +97,7 @@ public class RssArticleParser extends DefaultHandler {
 		parser.parse(rssIs, this); 
 	}
 	
-	public List<ArticleModel> getArticleList(String host) {
-		for (int i = 0; i < articleList.size(); i++) {
-			articleList.get(i).setHost(host);
-		}
+	public List<ArticleModel> getArticleList() {
 		return articleList;
 	}
 }
