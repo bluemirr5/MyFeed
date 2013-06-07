@@ -1,7 +1,7 @@
 package com.nnggstory.feedfactory.service;
 
 import com.nnggstory.feedfactory.model.DataUserModel;
-import com.nnggstory.feedfactory.model.UserViewModel;
+import com.nnggstory.feedfactory.model.ViewUserModel;
 
 public interface ManagementFeedService {
 	/**
@@ -11,7 +11,7 @@ public interface ManagementFeedService {
 	 * @return
 	 * @throws Exception
 	 */
-	public UserViewModel getUser(String userId) throws Exception;
+	public ViewUserModel getUser(String userId) throws Exception;
 	/**
 	 * 데이터 베이스에 사용자 정보를 저장한다.
 	 * 

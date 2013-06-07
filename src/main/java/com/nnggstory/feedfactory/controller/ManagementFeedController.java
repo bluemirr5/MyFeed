@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nnggstory.feedfactory.model.DataUserModel;
-import com.nnggstory.feedfactory.model.UserViewModel;
+import com.nnggstory.feedfactory.model.ViewUserModel;
 import com.nnggstory.feedfactory.service.ManagementFeedService;
 
 /**
@@ -41,7 +41,7 @@ public class ManagementFeedController {
 			@PathVariable String userId,
 			Model model
 			) throws Exception {
-		UserViewModel userViewModel = managementFeedService.getUser(userId);
+		ViewUserModel userViewModel = managementFeedService.getUser(userId);
 		if(userViewModel != null) {
 			model.addAttribute("user", userViewModel);
 		}
