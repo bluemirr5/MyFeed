@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nnggstory.feedfactory.model.ArticleModel;
+import com.nnggstory.feedfactory.model.RssPublishItemModel;
 import com.nnggstory.feedfactory.model.RssPulishChannelModel;
 
 @Service
@@ -24,7 +25,7 @@ public class FeedServiceImpl implements FeedService {
 		List<String> feedHostList = managementFeedService.getFeedHostListByUserNFeedGroup(userId, groupId);
 		
 		if(feedHostList != null && feedHostList.size() > 0) {
-			List<ArticleModel> totalArticleList = new ArrayList<ArticleModel>();
+			List<RssPublishItemModel> totalArticleList = new ArrayList<RssPublishItemModel>();
 			rssPublicModel = new RssPulishChannelModel();
 			for(String hostUrl : feedHostList) {
 				//TODO Thread 처리 가능하다면 추후 변경
@@ -39,7 +40,7 @@ public class FeedServiceImpl implements FeedService {
 			}
 			//TODO sort
 			
-			
+			rssPublicModel.setItem(totalArticleList);
 		}
 		
 		return rssPublicModel;

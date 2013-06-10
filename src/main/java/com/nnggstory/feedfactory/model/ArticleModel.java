@@ -25,7 +25,7 @@ public class ArticleModel extends RssPublishItemModel {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		setPubDate(pubDate);
+		super.setPubDate(pubDate);
 	}
 	public long getPubDateToLong() {
 		return pubDateToLong;

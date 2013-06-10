@@ -58,7 +58,7 @@ public class ManagementFeedServiceImpl implements ManagementFeedService {
 		List<DataFeedGroupModel> feedGroupList = dataModel.feedGroupList;
 		List<String> feedHostUrlList = null;
 		for(DataFeedGroupModel feedGroupModel : feedGroupList) {
-			if(feedGroupModel.feedGroupId == groupId) {
+			if(groupId.equals(feedGroupModel.feedGroupId)) {
 				feedHostUrlList = feedGroupModel.feedList;
 				break;
 			}

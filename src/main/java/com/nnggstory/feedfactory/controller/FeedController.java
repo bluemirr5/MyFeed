@@ -1,10 +1,13 @@
 package com.nnggstory.feedfactory.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nnggstory.feedfactory.model.RssPulishChannelModel;
@@ -17,19 +20,22 @@ import com.nnggstory.feedfactory.service.FeedService;
  *
  */
 @Controller
+@RequestMapping("public")
 public class FeedController {
 	@Autowired
 	private FeedService feedService;
 	
 	@RequestMapping(
-			value="/rss/userId/{userId}/groupId/{groupId}",
+			value="/rss",
 			method=RequestMethod.GET
 			)
 	public @ResponseBody RssPulishChannelModel getRss(
-			@PathVariable String userId,
-			@PathVariable String groupId
+			@RequestParam String userId,
+			@RequestParam String groupId
 			) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 		RssPulishChannelModel resultModel = feedService.getRssByUserNGroup(userId, groupId);
+		map.put("response", resultModel);
 		return resultModel;
 	}
 }
