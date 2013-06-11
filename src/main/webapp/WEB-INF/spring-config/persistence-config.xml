@@ -39,8 +39,8 @@
 		port="${feedfactory.mongodb.config.port}"
 		dbname="${feedfactory.mongodb.config.dbname}"
 		username="${feedfactory.mongodb.config.username}"
+		password="${feedfactory.mongodb.config.password}"
 	/>
-<!-- 		password="${rss.mongodb.config.password}" -->
 	
 	<bean id="mongoTypeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
 		<constructor-arg name="typeKey"><null/></constructor-arg>

@@ -33,9 +33,7 @@ public class FeedController {
 			@RequestParam String userId,
 			@RequestParam String groupId
 			) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
 		RssPulishChannelModel resultModel = feedService.getRssByUserNGroup(userId, groupId);
-		map.put("response", resultModel);
 		return resultModel;
 	}
 }

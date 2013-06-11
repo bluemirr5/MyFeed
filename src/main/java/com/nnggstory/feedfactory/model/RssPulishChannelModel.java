@@ -2,6 +2,12 @@ package com.nnggstory.feedfactory.model;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="channel")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RssPulishChannelModel {
 	private String title = null;
 	private String link = null;
@@ -69,6 +75,8 @@ public class RssPulishChannelModel {
 	}
 }
 
+@XmlRootElement(name="rssItem")
+@XmlAccessorType(XmlAccessType.FIELD)
 class RssPublishImageModel {
 	private String title = null;
 	private String url = null;
